@@ -1,27 +1,30 @@
 # 03-cluster-deployment
 
 ## Goal
-Configure and start a Lealone cluster environment to ensure nodes communicate and distribute data.
+Configure and start a Lealone cluster environment, verify nodes communicate, and confirm basic SQL functionality via smoke tests.
 
 ## In Scope
 - Writing cluster configuration files.
 - Starting multiple Lealone nodes.
 - Verifying cluster health and connectivity.
+- Running basic SQL smoke tests (create table, insert, select).
 
 ## Out of Scope
 - Performance testing.
-- Data loading.
+- Data loading at scale.
 
 ## Done Criteria
 - Multiple Lealone nodes are running.
 - Nodes form a cluster successfully.
 - The cluster status can be verified.
+- Basic SQL operations (DDL + DML) work on the cluster.
 
 ## Planned Changes
-- `setup-lealone-cluster` - Declared: planned - Write cluster configurations, start multiple nodes, and verify the cluster health.
+- `configure-cluster` - Declared: planned - Write cluster configuration files for a small multi-node setup (2-3 nodes).
+- `deploy-and-smoke-test` - Declared: planned - Start the cluster nodes and run basic SQL smoke tests to verify functionality.
 
 ## Dependencies
-- Successful completion of milestone 01.
+- Milestone 01 must be complete.
 
 ## Risks
 - Network configuration issues between nodes.
@@ -31,4 +34,4 @@ Configure and start a Lealone cluster environment to ensure nodes communicate an
 - Declared: proposed
 
 ## Notes
-- Start with a small cluster (e.g., 2-3 nodes) to verify the concept.
+- Start with a small cluster (2-3 nodes) to verify the concept before scaling.
