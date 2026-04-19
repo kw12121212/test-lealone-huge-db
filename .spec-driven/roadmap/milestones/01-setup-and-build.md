@@ -18,8 +18,8 @@ Fetch the Lealone database source code and compile it successfully.
 - Executable database binaries or run scripts are available.
 
 ## Planned Changes
-- `clone-lealone` - Declared: planned - Clone the Lealone source repository from GitHub.
-- `build-lealone` - Declared: planned - Configure the build environment and compile Lealone from source.
+- `clone-lealone` - Declared: complete - Clone the Lealone source repository from GitHub.
+- `build-lealone` - Declared: complete - Configure the build environment and compile Lealone from source.
 
 ## Dependencies
 - Local Java/Maven environment (or whatever Lealone requires).
@@ -28,7 +28,10 @@ Fetch the Lealone database source code and compile it successfully.
 - Build failures due to missing dependencies or incompatible environment versions.
 
 ## Status
-- Declared: proposed
+- Declared: complete
 
 ## Notes
 - None.
+
+
+

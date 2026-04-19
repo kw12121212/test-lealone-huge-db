@@ -18,7 +18,7 @@ Define a simple table schema (up to 10 fields) and write a tool to generate 70 m
 - Sample data is verified to match the schema.
 
 ## Planned Changes
-- `define-schema` - Declared: planned - Design the single table schema by surveying Lealone's supported data types.
+- `define-schema` - Declared: complete - Design the single table schema by surveying Lealone's supported data types.
 - `build-data-generator` - Declared: planned - Implement an efficient data generation tool capable of producing 70 million records.
 
 ## Dependencies
@@ -32,3 +32,4 @@ Define a simple table schema (up to 10 fields) and write a tool to generate 70 m
 
 ## Notes
 - The generated data could be written to CSV or SQL dump files, or kept in memory if generated on the fly during the load phase.
+
