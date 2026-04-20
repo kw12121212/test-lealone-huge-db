@@ -18,7 +18,7 @@ Load all 70 million generated records into the Lealone cluster and verify data i
 - Spot-check queries return correct data.
 
 ## Planned Changes
-- `create-target-table` - Declared: planned - Execute the schema DDL on the cluster to create the target table.
+- `create-target-table` - Declared: complete - Execute the schema DDL on the cluster to create the target table.
 - `load-data` - Declared: planned - Import all 70 million records into the cluster, handling batch sizing and error recovery.
 - `verify-data-integrity` - Declared: planned - Run row count checks and spot queries to confirm data correctness.
 
@@ -37,3 +37,4 @@ Load all 70 million generated records into the Lealone cluster and verify data i
 ## Notes
 - Need to determine whether to use JDBC, Lealone's specific client, or bulk import tools.
 - Batch size and concurrency may need tuning during loading.
+
