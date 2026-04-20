@@ -20,8 +20,8 @@ Configure and start a Lealone cluster environment, verify nodes communicate, and
 - Basic SQL operations (DDL + DML) work on the cluster.
 
 ## Planned Changes
-- `configure-cluster` - Declared: planned - Write cluster configuration files for a small multi-node setup (2-3 nodes).
-- `deploy-and-smoke-test` - Declared: planned - Start the cluster nodes and run basic SQL smoke tests to verify functionality.
+- `configure-cluster` - Declared: complete - Write cluster configuration files for a small multi-node setup (2-3 nodes).
+- `deploy-and-smoke-test` - Declared: complete - Start the cluster nodes and run basic SQL smoke tests to verify functionality.
 
 ## Dependencies
 - Milestone 01 must be complete.
@@ -31,7 +31,10 @@ Configure and start a Lealone cluster environment, verify nodes communicate, and
 - Misconfiguration of cluster properties.
 
 ## Status
-- Declared: proposed
+- Declared: complete
 
 ## Notes
 - Start with a small cluster (2-3 nodes) to verify the concept before scaling.
+
+
+
