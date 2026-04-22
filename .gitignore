@@ -28,3 +28,4 @@ bench/results/
 cluster/data/
 cluster/*.pids
 data/
+out/
