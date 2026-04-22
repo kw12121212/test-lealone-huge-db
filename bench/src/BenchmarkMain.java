@@ -1,7 +1,10 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -36,11 +39,23 @@ public class BenchmarkMain {
         System.out.printf("  JDBC URL:      %s%n", jdbcUrl);
         System.out.println();
 
-        // Verify connectivity
-        try (Connection conn = DriverManager.getConnection(jdbcUrl)) {
-            // connectivity check
+        // Verify connectivity and detect row count
+        Properties props = new Properties();
+        props.setProperty("user", "root");
+        long maxId = 0;
+        try (Connection conn = DriverManager.getConnection(jdbcUrl, props)) {
+            try (Statement st = conn.createStatement();
+                 ResultSet rs = st.executeQuery("SELECT COUNT(*) FROM benchmark")) {
+                rs.next();
+                maxId = rs.getLong(1);
+            }
+            System.out.printf("  Table rows:    %,d%n", maxId);
         } catch (Exception e) {
             System.err.println("ERROR: Cannot connect to cluster: " + e.getMessage());
+            System.exit(1);
+        }
+        if (maxId == 0) {
+            System.err.println("ERROR: benchmark table is empty");
             System.exit(1);
         }
 
@@ -57,7 +72,7 @@ public class BenchmarkMain {
                 ExecutorService pool = Executors.newFixedThreadPool(threads);
                 List<Future<LatencyRecorder>> futures = new ArrayList<>();
                 for (int t = 0; t < threads; t++) {
-                    futures.add(pool.submit(new BenchmarkWorker(jdbcUrl, op, perWorker, WARMUP_PER_WORKER)));
+                    futures.add(pool.submit(new BenchmarkWorker(jdbcUrl, op, perWorker, WARMUP_PER_WORKER, maxId)));
                 }
 
                 // Merge all worker samples into one recorder

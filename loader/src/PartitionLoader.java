@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Properties;
 
 /**
  * Loads one CSV partition file into the benchmark table via JDBC batch INSERT.
@@ -41,7 +42,9 @@ public class PartitionLoader {
         long totalRows = 0;
         String partitionName = csvFile.getFileName().toString();
 
-        try (Connection conn = DriverManager.getConnection(jdbcUrl);
+        Properties props = new Properties();
+        props.setProperty("user", "root");
+        try (Connection conn = DriverManager.getConnection(jdbcUrl, props);
              PreparedStatement ps = conn.prepareStatement(INSERT_SQL);
              CsvBatchReader reader = new CsvBatchReader(csvFile, batchSize)) {
 

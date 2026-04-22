@@ -23,3 +23,8 @@
 hs_err_pid*
 replay_pid*
 lealone_data/
+bench/out/
+bench/results/
+cluster/data/
+cluster/*.pids
+data/

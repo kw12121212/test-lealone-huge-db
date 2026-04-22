@@ -2,6 +2,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Properties;
 import java.util.Random;
 import java.util.concurrent.Callable;
 
@@ -16,19 +17,27 @@ public class BenchmarkWorker implements Callable<LatencyRecorder> {
     private final OpType opType;
     private final int iterations;
     private final int warmup;
+    private final long maxId;
     private final Random rng = new Random();
 
-    public BenchmarkWorker(String jdbcUrl, OpType opType, int iterations, int warmup) {
+    public BenchmarkWorker(String jdbcUrl, OpType opType, int iterations, int warmup, long maxId) {
         this.jdbcUrl = jdbcUrl;
         this.opType = opType;
         this.iterations = iterations;
         this.warmup = warmup;
+        this.maxId = maxId;
+    }
+
+    public BenchmarkWorker(String jdbcUrl, OpType opType, int iterations, int warmup) {
+        this(jdbcUrl, opType, iterations, warmup, 70_000_000);
     }
 
     @Override
     public LatencyRecorder call() throws Exception {
         LatencyRecorder recorder = new LatencyRecorder();
-        try (Connection conn = DriverManager.getConnection(jdbcUrl)) {
+        Properties props = new Properties();
+        props.setProperty("user", "root");
+        try (Connection conn = DriverManager.getConnection(jdbcUrl, props)) {
             switch (opType) {
                 case POINT_SELECT -> runPointSelect(conn, recorder);
                 case RANGE_SELECT -> runRangeSelect(conn, recorder);
@@ -42,7 +51,7 @@ public class BenchmarkWorker implements Callable<LatencyRecorder> {
         String sql = "SELECT * FROM benchmark WHERE id = ?";
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             for (int i = 0; i < warmup + iterations; i++) {
-                long id = Math.abs(rng.nextLong()) % 70_000_000 + 1;
+                long id = Math.abs(rng.nextLong()) % maxId + 1;
                 ps.setLong(1, id);
                 long start = System.nanoTime();
                 try (ResultSet rs = ps.executeQuery()) {
