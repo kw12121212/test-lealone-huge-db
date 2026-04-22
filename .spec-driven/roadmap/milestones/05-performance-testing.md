@@ -18,7 +18,7 @@ Run performance benchmarks against the loaded Lealone cluster and document resul
 - Results are documented for reference.
 
 ## Planned Changes
-- `create-benchmarks` - Declared: planned - Write benchmark scripts for read and write operations with configurable concurrency.
+- `create-benchmarks` - Declared: complete - Write benchmark scripts for read and write operations with configurable concurrency.
 - `run-benchmarks` - Declared: planned - Execute benchmarks, collect metrics, and document the results.
 
 ## Dependencies
@@ -29,7 +29,9 @@ Run performance benchmarks against the loaded Lealone cluster and document resul
 - Network latency between client and cluster nodes may skew results.
 
 ## Status
-- Declared: proposed
+- Declared: active
 
 ## Notes
 - Benchmark results should include both single-node and cross-node query patterns if applicable.
+
+
